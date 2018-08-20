@@ -21,3 +21,24 @@ cross-correlation with model spectra, including barycentric radial velocity calc
 flux calibration. 
 
 For more info, [read the docs](http://arces.readthedocs.io/en/latest/?badge=latest)!
+
+
+#### Citation
+
+If you make use of `aesop` in your research, please cite our JOSS paper: 
+
+```
+@article{Morris2018,
+  doi = {10.21105/joss.00854},
+  url = {https://doi.org/10.21105/joss.00854},
+  year  = {2018},
+  month = {aug},
+  publisher = {The Open Journal},
+  volume = {3},
+  number = {28},
+  pages = {854},
+  author = {Brett M. Morris and Trevor Dorn-Wallenstein},
+  title = {aesop: {ARC} Echelle Spectroscopic Observation Pipeline},
+  journal = {Journal of Open Source Software}
+}
+```
