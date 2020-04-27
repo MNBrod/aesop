@@ -4,12 +4,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-def gauss(x, *p):
+def gaussian(x, *p):
     A, mu, sigma = p
 
     return A*np.exp(-(x-mu)**2/(2.*sigma**2))
 
-def findSinglePeak(img, centerX, centerY, minusX, plusX, minusY, plusY,
+def find_single_peak(img, centerX, centerY, minusX, plusX, minusY, plusY,
                     plot=False):
     """
     Finds the center of an aperture by summing the region defined by 
@@ -57,7 +57,7 @@ def findSinglePeak(img, centerX, centerY, minusX, plusX, minusY, plusY,
     # Fit the given data
     p0 = [4000., 0., 2.]
     
-    coeff, var_matrix = curve_fit(gauss, np.arange(len(summed)), summed, p0=p0)
+    coeff, var_matrix = curve_fit(gaussian, np.arange(len(summed)), summed, p0=p0)
     
     size = maxY - minY
     
@@ -88,7 +88,7 @@ def findSinglePeak(img, centerX, centerY, minusX, plusX, minusY, plusY,
 
     return centerY + minusY + coeff[1]
 
-def traceAperture(img, apDb, nsum, step, nlost):
+def trace_aperture(img, apDb, nsum, step, nlost):
     """
     Traces an aperture across its entire length
     
@@ -133,7 +133,7 @@ def traceAperture(img, apDb, nsum, step, nlost):
     
     initY = apDb['center']['y']
     
-    Y = findSinglePeak(img, X, initY, mX, pX, mY, pY)
+    Y = find_single_peak(img, X, initY, mX, pX, mY, pY)
     
     startY = Y
 
@@ -148,7 +148,7 @@ def traceAperture(img, apDb, nsum, step, nlost):
         # Look for a peak at the next X value, with the previous Y value
         try:
             
-            Y = findSinglePeak(img, X, Y, mX, pX, mY, pY)
+            Y = find_single_peak(img, X, Y, mX, pX, mY, pY)
             
             resX = np.append(resX, X)
             
@@ -170,7 +170,7 @@ def traceAperture(img, apDb, nsum, step, nlost):
         # Look for a peak at the next X value, with the previous Y value
         try:
             
-            Y = findSinglePeak(img, X, Y, mX, pX, mY, pY)
+            Y = find_single_peak(img, X, Y, mX, pX, mY, pY)
             
             resX = np.append(resX, X)
             
@@ -182,7 +182,7 @@ def traceAperture(img, apDb, nsum, step, nlost):
     
     return resX, resY
 
-def getPerpLine(x_0, y_0, slope, length = 10):
+def get_perp_line(x_0, y_0, slope, length = 10):
     """
     Gets a line perpendicular to a tangent line running through the
     given points with the given slope, with the given length
@@ -220,7 +220,7 @@ def getPerpLine(x_0, y_0, slope, length = 10):
     
     return x_vals, y_vals
 
-def getTangentLine(x_0, y_0, slope, length = 10):
+def get_tangent_line(x_0, y_0, slope, length = 10):
     """
     Gets a line of the given legnth tangent to the point and slope given
 

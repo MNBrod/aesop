@@ -1,6 +1,6 @@
 __all__ = ['read_iraf_database']
 
-def parseAperture(ap):
+def parse_aperture(ap):
 
     """
     Parses a single entry in a apall-styled IRAF database into a
@@ -71,7 +71,7 @@ def parseAperture(ap):
 
     return res
 
-def read_iraf_database(filename):
+def read_IRAF_database(filename):
 
     """
     Parses an apall-styled IRAF database into a apeture-indexed
@@ -99,7 +99,7 @@ def read_iraf_database(filename):
 
         for line in lines:
 
-            ap = parseAperture(line)
+            ap = parse_aperture(line)
 
             apertures.append(ap)
 

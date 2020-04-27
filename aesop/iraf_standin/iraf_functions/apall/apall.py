@@ -180,11 +180,11 @@ def trace_apertures(bl, retrace=False):
     
     else:
     
-        db = db_utils.readIRAFDatabase('apech.db')
+        db = db_utils.read_IRAF_database('apech.db')
 
         for ap in db:
 
-            apX, apY = trace.traceAperture(bl, ap, 10, 10, 3)
+            apX, apY = trace.trace_aperture(bl, ap, 10, 10, 3)
 
             ap['xTrace'] = apX
 
