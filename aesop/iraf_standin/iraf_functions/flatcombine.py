@@ -15,7 +15,8 @@ def flatcombine(filenames, output_name):
     output_name: pathlib.Path or str
         Filepath pointing to location to save combined flat
     '''
-    ccds = list(map(lambda x : CCDData.read(x, unit=u.dimensionless_unscaled), filenames))
+    ccds = list(map(lambda x : CCDData.read(x, unit=u.dimensionless_unscaled),
+                                            filenames))
     
     combiner = Combiner(ccds)
     

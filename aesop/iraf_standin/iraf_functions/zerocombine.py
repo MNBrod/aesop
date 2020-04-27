@@ -16,7 +16,8 @@ def zerocombine(filenames, output_name):
         Filepath pointing to location to save combined image
     '''
     
-    ccds = list(map(lambda x : CCDData.read(x, unit=u.dimensionless_unscaled), filenames))
+    ccds = list(map(lambda x : CCDData.read(x, unit=u.dimensionless_unscaled),
+                                            filenames))
     
     combiner = Combiner(ccds)
     

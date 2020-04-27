@@ -9,10 +9,12 @@ def gauss(x, *p):
 
     return A*np.exp(-(x-mu)**2/(2.*sigma**2))
 
-def findSinglePeak(img, centerX, centerY, minusX, plusX, minusY, plusY, plot=False):
+def findSinglePeak(img, centerX, centerY, minusX, plusX, minusY, plusY,
+                    plot=False):
     """
-    Finds the center of an aperture by summing the region defined by [minusX, minusY, plusX, plusY]
-    around [centerX, centerY] across rows, and fitting a Gaussian to those points
+    Finds the center of an aperture by summing the region defined by 
+    [minusX, minusY, plusX, plusY] around [centerX, centerY] across 
+    rows, and fitting a Gaussian to those points
     
     Parameters
     ----------
@@ -49,7 +51,7 @@ def findSinglePeak(img, centerX, centerY, minusX, plusX, minusY, plusY, plot=Fal
     
     summed = np.sum(subImg, axis=1)
 
-    # Bring the Gaussian down to 0 to eliminate the need for a y-offset fititng parameter
+    # Set baseline to ~0 to remove need for y-offset parameter
     summed = summed - np.min(summed)
 
     # Fit the given data
@@ -182,17 +184,20 @@ def traceAperture(img, apDb, nsum, step, nlost):
 
 def getPerpLine(x_0, y_0, slope, length = 10):
     """
-    Gets a line perpendicular to a tangent line running through the given 
-    points with the given slope, with the given length
+    Gets a line perpendicular to a tangent line running through the
+    given points with the given slope, with the given length
 
     Parameters
     -------
     x_0: int
-        X coordinate of where the perpendicular line should intersect the given tangent
+        X coordinate of where the perpendicular line should intersect 
+        the given tangent
     y_0: int
-        Y coordinate of where the perpendicular line should intersect the given tangent
+        Y coordinate of where the perpendicular line should intersect 
+        the given tangent
     slope: float
-        Slope of the tangent line that the output should be perpendicular too
+        Slope of the tangent line that the output should be 
+        perpendicular too
     length: int
         number of points that should define the output line
     

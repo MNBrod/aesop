@@ -13,24 +13,26 @@ import trace
 __all__ = ['apall']
 
 def generate_mask_from_background_sample(b_sample):
-    """
+    '''
     Generates a boolean mask as defined by a region
 
     Parameters
     -------
     b_sample: str
-        Region to fit the mask over, in the format "low_min:low_max:high_min:high_max"
+        Region to fit the mask over, in the format
+        'low_min:low_max:high_min:high_max'
     
     Returns
     -------
     mask: array of bool
-        A boolean mask with True values for the regions defined by each comma separated region
-    """
-    below, above = b_sample.split(",")
+        A boolean mask with True values for the regions defined by each
+        comma separated region
+    '''
+    below, above = b_sample.split(',')
     
-    below_low, below_high = [int(i) for i in below.split(":")]
+    below_low, below_high = [int(i) for i in below.split(':')]
     
-    above_low, above_high = [int(i) for i in above.split(":")]
+    above_low, above_high = [int(i) for i in above.split(':')]
     
     diff = 0 - below_low
     
@@ -50,20 +52,22 @@ def generate_mask_from_background_sample(b_sample):
     
     return mask
 
-def fit_background(data, plot=False, b_sample="-22:-15,15:22"):
-    """
+def fit_background(data, plot=False, b_sample='-22:-15,15:22'):
+    '''
     Generates a boolean mask as defined by a region
 
     Parameters
     -------
     b_sample: str
-        Region to fit the mask over, in the format "low_min:low_max:high_min:high_max"
+        Region to fit the mask over, in the format
+        'low_min:low_max:high_min:high_max'
     
     Returns
     -------
     mask: array of bool
-        A boolean mask with True values for the regions defined by each comma separated region
-    """
+        A boolean mask with True values for the regions defined by each
+        comma separated region
+    '''
     
     cheb = np.polynomial.chebyshev
 
@@ -73,7 +77,7 @@ def fit_background(data, plot=False, b_sample="-22:-15,15:22"):
     
         plt.figure()
     
-        plt.plot(x_vals, data, color="blue")
+        plt.plot(x_vals, data, color='blue')
     
     mask = generate_mask_from_background_sample(b_sample)
     
@@ -101,9 +105,10 @@ def fit_background(data, plot=False, b_sample="-22:-15,15:22"):
     
     return result
     
-def extract_summing_region(data, b_sample="-22:-15,15:22"):
+def extract_summing_region(data, b_sample='-22:-15,15:22'):
     '''
-    Extracts the values between the specified background regions in an input array
+    Extracts the values between the specified background regions in an
+    input array
 
     Parameters
     -------
@@ -147,26 +152,27 @@ def isInBounds(image, x, y):
 
 def trace_apertures(bl, retrace=False):
     '''
-    Finds and traces every aperture in an image based on the IRAF database
-    template. If the file has already traced, the previous trace will be used
-    unless otherwise specified
+    Finds and traces every aperture in an image based on the IRAF
+    database template. If the file has already traced, the previous
+    trace will be used unless otherwise specified
 
     Parameters
     -------
     bl: 2D array of int
         Image to trace
     retrace: bool
-        If True, any existing traces will be ignored and then overwritten
+        If True, any existing traces will be ignored and then
+        overwritten
     
     Returns
     -------
     db: List of dict
-        List of all the apertures with the coordinates of several points along
-        each aperture
+        List of all the apertures with the coordinates of several points
+        along each aperture
     '''
     if (os.path.exists('./traceDB.pkl') and not retrace):
     
-        f = open("traceDB.pkl", "rb" )
+        f = open('traceDB.pkl', 'rb' )
     
         db = pickle.load(f)
     
@@ -184,7 +190,7 @@ def trace_apertures(bl, retrace=False):
 
             ap['yTrace'] = apY
 
-        f = open("traceDB.pkl", "wb")
+        f = open('traceDB.pkl', 'wb')
 
         pickle.dump(db, f)
 
@@ -207,8 +213,8 @@ def fit_traces(db, plot_all_traces=False):
     Returns
     -------
     db: list of dict
-        The input database with the coefficients of the legendre polynomial
-        added to each aperture
+        The input database with the coefficients of the legendre
+        polynomial added to each aperture
     '''
     leg = np.polynomial.legendre
 
@@ -226,8 +232,8 @@ def fit_traces(db, plot_all_traces=False):
 
 def generate_output(bl, db, plot_output = False):    
     '''
-    Takes an image and an appropriate list of fitted apertures, and extracts
-    a background subtracted output using those fits.
+    Takes an image and an appropriate list of fitted apertures, and
+    extracts a background subtracted output using those fits.
 
     Parameters
     -------
@@ -325,7 +331,7 @@ def apall(input_name, output_name, plot_input=False,plot_output=True):
     
     hdul[0].data = output
     
-    hdul.writeto(open(output_name, "wb"))
+    hdul.writeto(open(output_name, 'wb'))
     
     hdul.close()
 

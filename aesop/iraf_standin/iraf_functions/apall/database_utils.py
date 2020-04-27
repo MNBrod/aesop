@@ -3,7 +3,8 @@ __all__ = ['read_iraf_database']
 def parseAperture(ap):
 
     """
-    Parses a single entry in a apall-styled IRAF database into a dictionary of parameters
+    Parses a single entry in a apall-styled IRAF database into a
+    dictionary of parameters
     
     Parameters
     ----------
@@ -13,7 +14,8 @@ def parseAperture(ap):
     Returns
     -------
     res : dictionary
-        Dictionary of all of the parameters contained in the daatbase, indexed over aperture number
+        Dictionary of all of the parameters contained in the daatbase,
+        indexed over aperture number
     """
 
     lines = ap.splitlines()
@@ -26,11 +28,14 @@ def parseAperture(ap):
 
     res['beam'] = int(lines[4].split()[1])
 
-    res['center'] = {'x': float(lines[5].split()[1]), 'y' : float(lines[5].split()[2])}
+    res['center'] = {'x': float(lines[5].split()[1]),
+                    'y' : float(lines[5].split()[2])}
 
-    res['low'] = {'x': float(lines[6].split()[1]), 'y' : float(lines[6].split()[2])}
+    res['low'] = {'x': float(lines[6].split()[1]),
+                    'y' : float(lines[6].split()[2])}
     
-    res['high'] = {'x': float(lines[7].split()[1]), 'y' : float(lines[7].split()[2])}
+    res['high'] = {'x': float(lines[7].split()[1]),
+                    'y' : float(lines[7].split()[2])}
     
     res['background'] = {
         'xmin' : float(lines[9].split()[1]),
@@ -69,7 +74,8 @@ def parseAperture(ap):
 def read_iraf_database(filename):
 
     """
-    Parses an apall-styled IRAF database into a apeture-indexed dictionary
+    Parses an apall-styled IRAF database into a apeture-indexed
+    dictionary
     
     Parameters
     ----------
@@ -79,7 +85,8 @@ def read_iraf_database(filename):
     Returns
     -------
     apertures : list of dictionary
-        List of all of the parameters contained in the database, indexed over aperture number
+        List of all of the parameters contained in the database, indexed
+        over aperture number
     """
 
     with open(filename, 'r') as file:

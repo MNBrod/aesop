@@ -5,8 +5,8 @@ __all__ = ['ccdproc']
 
 def ccdproc(input, output, zero_file, badpix_file, trimsec):
     '''
-    Emulates the IRAF command ccdproc by trimming the input image to the given
-    size, subtracting a bias image, and removing bad pixels
+    Emulates the IRAF command ccdproc by trimming the input image to the
+    given size, subtracting a bias image, and removing bad pixels
 
     Parameters
     -------

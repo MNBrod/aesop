@@ -5,7 +5,8 @@ __all__ = ['cosmicrays']
 
 def cosmicrays(input_name, output_name, npasses=20):
     '''
-    Removes cosmic rays from the input .FITS file using a medianing method
+    Removes cosmic rays from the input .FITS file using a medianing
+    method
 
     Parameters
     -------
